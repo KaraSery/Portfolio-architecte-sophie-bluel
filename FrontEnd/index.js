@@ -1,3 +1,5 @@
+import {setUpAdminDeleteModal, setUpDeleteWorkButtons} from "./admin/js/admin-delete.js";
+
 const APIRootUrl = "http://localhost:5678"
 const categoriesPath = '/api/categories'
 const worksPath = '/api/works'
@@ -53,7 +55,7 @@ function filterWorksByCategory(categoryID, works) {
     return works.filter(work => work.categoryId === categoryID)
 }
 
-function getWorkByID(workID, works) {
+export function getWorkByID(workID, works) {
     return works.find(work => work.id === workID)
 }
 
@@ -69,7 +71,6 @@ function setupFilters(works) {
     filtersItem.forEach(filterLabel => {
         const input = filterLabel.querySelector('input')
         const categoryID = parseInt(input.value)
-        debugger
         function filterWorkAndUpdateWorkInGallery() {
             const filteredWorks = filterWorksByCategory(categoryID, works)
             setupWorksInGallery(filteredWorks)
@@ -85,12 +86,19 @@ function setCategoriesFilters(categories, works) {
 
     return filters
 }
-async function init() {
+export async function init() {
     const works = await getWorks()
     const gallery = setupWorksInGallery(works)
 
     const categories = await getCategories()
     const filters = setCategoriesFilters(categories, works)
+//******************
+//******************
+//******ADMIN*******
+//******************
+//******************
+    setUpAdminDeleteModal(works)
+    setUpDeleteWorkButtons(works)
 }
 
 async function main() {
