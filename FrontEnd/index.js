@@ -2,10 +2,10 @@ const APIRootUrl = "http://localhost:5678"
 const categoriesPath = '/api/categories'
 const worksPath = '/api/works'
 
-const getCategories = async function () {
+
+async function getCategories () {
     const url = new URL(APIRootUrl);
     url.pathname = categoriesPath
-
     const response = await fetch(url, {
         method: 'GET', headers: {
             'Accept': 'application/json',
@@ -13,7 +13,8 @@ const getCategories = async function () {
     })
     return await response.json()
 }
-const getWorks = async function () {
+
+async function getWorks() {
     const url = new URL(APIRootUrl);
     url.pathname = worksPath
 
@@ -22,6 +23,7 @@ const getWorks = async function () {
             'Accept': 'application/json',
         }
     })
+
     return await response.json()
 }
 
@@ -47,39 +49,52 @@ function workListHTML(works) {
         return `${workHTML(work)}`
     }).join(' ')
 }
-function filterWorksByCategory(category, works) {
-    return works.filter(work => work.categoryId === category)
+function filterWorksByCategory(categoryID, works) {
+    return works.filter(work => work.categoryId === categoryID)
 }
 
-async function main() {
+function getWorkByID(workID, works) {
+    return works.find(work => work.id === workID)
+}
 
-    // Gallery list items  HTML
-    const works = await getWorks()
-    console.log(works)
+function setupWorksInGallery(works) {
     const gallery = document.querySelector('.gallery')
     gallery.innerHTML = workListHTML(works)
+    return gallery
+}
 
-
-    // categories filter html
-    const categories = await getCategories()
-    console.log(categories)
-    const filters = document.querySelector('.filters')
-    filters.innerHTML = categories.map(category => {
-        return `${categoryHTML(category)}`
-    }).join('')
-
-    // Handle filter on click
-
+function setupFilters(works) {
     const filtersItem = Array.from(document.querySelectorAll('.filters__item'))
 
     filtersItem.forEach(filterLabel => {
         const input = filterLabel.querySelector('input')
-        const category = parseInt(input.value)
-        input.addEventListener('change', () => {
-            const filteredWorks = filterWorksByCategory(category, works)
-            gallery.innerHTML = workListHTML(filteredWorks)
-        })
+        const categoryID = parseInt(input.value)
+        debugger
+        function filterWorkAndUpdateWorkInGallery() {
+            const filteredWorks = filterWorksByCategory(categoryID, works)
+            setupWorksInGallery(filteredWorks)
+        }
+        input.addEventListener('change', filterWorkAndUpdateWorkInGallery)
     })
+}
+
+function setCategoriesFilters(categories, works) {
+    const filters = document.querySelector('.filters')
+    filters.innerHTML = categories.map(category => categoryHTML(category)).join('')
+    setupFilters(works)
+
+    return filters
+}
+async function init() {
+    const works = await getWorks()
+    const gallery = setupWorksInGallery(works)
+
+    const categories = await getCategories()
+    const filters = setCategoriesFilters(categories, works)
+}
+
+async function main() {
+    await init()
 }
 
 main()
