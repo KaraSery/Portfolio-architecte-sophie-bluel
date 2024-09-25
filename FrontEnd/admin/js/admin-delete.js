@@ -86,11 +86,15 @@ export function setUpDeleteWorkButtons(works) {
 }
 export function setUpAdminDeleteModal(works) {
     const modal = document.getElementById('admin-delete-dialog')
-    const showButton = document.querySelector('.admin-delete-dialog-show')
-    showButton.addEventListener('click', ()=> modal.showModal())
+    const showButtons = Array.from(document.querySelectorAll('.admin-delete-dialog-show'))
+    showButtons.forEach(
+        showButton=>
+            showButton.addEventListener('click', ()=> modal.showModal()))
 
-    const closeButton = modal.querySelector('.admin-delete-dialog-close')
-    closeButton.addEventListener('click', () => modal.close())
+    const closeButtons = Array.from(modal.querySelectorAll('.admin-delete-dialog-close'))
+    closeButtons.forEach(
+        closeButton=>
+            closeButton.addEventListener('click', ()=> modal.close()))
 
     const deleteWorksList = modal.querySelector('.dialog__works-list')
     deleteWorksList.innerHTML = deleteWorkListHTML(works)
