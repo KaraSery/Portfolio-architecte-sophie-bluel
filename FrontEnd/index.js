@@ -1,4 +1,5 @@
 import {setUpAdminDeleteModal, setUpDeleteWorkButtons} from "./admin/js/admin-delete.js";
+import {setUpAdminAddModal} from "./admin/js/adminAdd.js";
 
 const APIRootUrl = "http://localhost:5678"
 const categoriesPath = '/api/categories'
@@ -15,20 +16,16 @@ async function getCategories () {
     })
     return await response.json()
 }
-
 async function getWorks() {
     const url = new URL(APIRootUrl);
     url.pathname = worksPath
-
     const response = await fetch(url, {
         method: 'GET', headers: {
             'Accept': 'application/json',
         }
     })
-
     return await response.json()
 }
-
 function categoryHTML(category) {
     return `
         <label  class="filters__item filter__label">
@@ -37,7 +34,6 @@ function categoryHTML(category) {
         </label>
     `
 }
-
 function workHTML(work) {
     return `
         <figure>
@@ -97,8 +93,11 @@ export async function init() {
 //******ADMIN*******
 //******************
 //******************
+//     DELETE
     setUpAdminDeleteModal(works)
     setUpDeleteWorkButtons(works)
+//     ADD
+    setUpAdminAddModal()
 }
 
 async function main() {

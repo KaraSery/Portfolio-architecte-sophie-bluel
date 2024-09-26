@@ -1,109 +1,123 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="UTF-8">
-	<title>Sophie Bluel - Architecte d'intérieur</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-		  integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-		  crossorigin="anonymous" referrerpolicy="no-referrer"/>
-	<meta name="description" content="">
-	<link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="UTF-8">
+    <title>Sophie Bluel - Architecte d'intérieur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+          integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
+    <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+    <nav>
+        <ul>
+            <li>projets</li>
+            <li>contact</li>
+            <li>login</li>
+            <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+        </ul>
+    </nav>
 </header>
 <main>
-	<section id="introduction">
-		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
-		</figure>
-		<article>
-			<h2>Designer d'espace</h2>
-			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
-		</article>
-	</section>
-	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<a class="admin-delete-dialog-show"><i class="fa-regular fa-pen-to-square"></i>Modifier</a>
-		<form class="filters">
-		</form>
-		<div class="gallery">
+    <section id="introduction">
+        <figure>
+            <img src="./assets/images/sophie-bluel.png" alt="">
+        </figure>
+        <article>
+            <h2>Designer d'espace</h2>
+            <p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
+                finale du chantier.</p>
+            <p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
+                couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier
+                sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+            <p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
+                décorateur(trice)</p>
+        </article>
+    </section>
+    <section id="portfolio">
+        <h2>Mes Projets</h2>
+        <a class="admin-delete-dialog-show"><i class="fa-regular fa-pen-to-square"></i>Modifier</a>
+        <form class="filters">
+        </form>
+        <div class="gallery">
 
-		</div>
-	</section>
-	<section id="contact">
-		<h2>Contact</h2>
-		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
-			<label for="name">Nom</label>
-			<input type="text" name="name" id="name">
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
-			<label for="message">Message</label>
-			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Envoyer">
-		</form>
-	</section>
-	<dialog id="admin-delete-dialog" class="admin-dialog dialog">
-		<nav id="admin-delete-dialog__nav" class="dialog__nav">
-			<button class="dialog__close admin-delete-dialog-close" type="button"><i class="fa-solid fa-xmark"></i></button>
-		</nav>
-		<h3>Galerie photo</h3>
-		<div class="dialog__works-list">
+        </div>
+    </section>
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Vous avez un projet ? Discutons-en !</p>
+        <form class="basic-form" action="#" method="post">
+            <label for="name">Nom</label>
+            <input type="text" name="name" id="name">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email">
+            <label for="message">Message</label>
+            <textarea name="message" id="message" cols="30" rows="10"></textarea>
+            <input type="submit" value="Envoyer">
+        </form>
+    </section>
+    <dialog id="admin-delete-dialog" class="admin-dialog dialog">
+        <nav id="admin-delete-dialog__nav" class="dialog__nav">
+            <button class="dialog__close admin-delete-dialog-close" type="button"><i class="fa-solid fa-xmark"></i>
+            </button>
+        </nav>
+        <h3>Galerie photo</h3>
+        <div class="dialog__works-list dialog-content">
 
-		</div>
-		<hr/>
-		<a href="#admin-add-dialog" class="action-button admin-delete-dialog-close admin-add-show">Ajouter une photo</a>
-		<dialog class="confirm-or-cancel-dialog">
-			<p class="dialog__text"></p>
-			<div class="buttons-wrapper">
-				<button class="confirm">Confirmer</button>
-				<button class="cancel">annuler</button>
-			</div>
-		</dialog>
-	</dialog>
-	<dialog id="admin-add-dialog" class="admin-dialog dialog">
-		<nav id="admin-add-dialog__nav" class="dialog__nav">
-			<a href="#admin-delete-dialog" class="header__previous admin-delete-dialog-show admin-add-close"><i class="fa-solid fa-arrow-left"></i></a>
-			<a href="#" class="header__close admin-add-close" type="button"><i class="fa-solid fa-xmark"></i></a>
-		</nav>
-		<h3>Galerie photo</h3>
-		<form class="dialog__add-form">
-			<div class="input-wrapper">
-				<label for="add-form-title"></label>
-				<input name="title" type="text" id="add-form-title">
-			</div>
-			<div class="input-wrapper">
-				<label for="add-form-category"></label>
-				<select name="category" id="add-form-category"></select>
-			</div>
-			<hr/>
-			<a href="#admin-add-dialog" type="submit">Valider</a>
-		</form>
-	</dialog>
+        </div>
+        <hr/>
+        <a class="action-button admin-delete-dialog-close admin-add-dialog-show">Ajouter une photo</a>
+        <dialog class="confirm-or-cancel-dialog">
+            <p class="dialog__text"></p>
+            <div class="buttons-wrapper">
+                <button class="confirm">Confirmer</button>
+                <button class="cancel">annuler</button>
+            </div>
+        </dialog>
+    </dialog>
+    <dialog id="admin-add-dialog" class="admin-dialog dialog">
+        <nav id="admin-add-dialog__nav" class="dialog__nav">
+            <button role="button" class="dialog__previous admin-delete-dialog-show admin-add-dialog-close"><i
+                    class="fa-solid fa-arrow-left"></i></button>
+            <button role="button" class="dialog__close admin-add-dialog-close" type="button"><i
+                    class="fa-solid fa-xmark"></i></button>
+        </nav>
+        <h3>Ajout photo</h3>
+        <form class="basic-form dialog__add-form dialog-content">
+            <label class="dragAndDrop-wrapper">
+                <i class="fa-solid fa-image"></i>
+                <input required name="file" type="file">
+                jpg, png: 4mo max
+            </label>
+            <label for="add-form-title">Titre</label>
+            <input required name="title" type="text" class="admin-dialog__base-input" id="add-form-title">
+
+            <label for="add-form-category">Categories</label>
+            <select required name="category" id="add-form-category">
+                <option>Objets</option>
+                <option>Appartements</option>
+                <option>Hotels & restaurants</option>
+            </select>
+            <hr/>
+            <input disabled class="action-button" name="submitInput" type="submit" value="Valider">
+        </form>
+    </dialog>
 </main>
 
 <footer>
-	<nav>
-		<ul>
-			<li>Mentions Légales</li>
-		</ul>
-	</nav>
+    <nav>
+        <ul>
+            <li>Mentions Légales</li>
+        </ul>
+    </nav>
 </footer>
 </body>
 <script type="module" src="index.js"></script>
