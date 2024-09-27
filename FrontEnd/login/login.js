@@ -33,7 +33,6 @@ async function submitLogin(form) {
         body: JSON.stringify(body)
     })
     const data = await response.json()
-    console.log(data)
     if ('token' in data) {
         login(data['token'])
     } else {

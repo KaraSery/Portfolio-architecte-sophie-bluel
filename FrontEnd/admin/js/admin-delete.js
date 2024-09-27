@@ -1,4 +1,5 @@
-import { init, getWorkByID } from '../../index.js';
+import {getWorkByID, updateWorksLists} from '../../index.js';
+import {updateConfirmOrCancelModal} from "../../modal.js";
 
 const APIRootUrl = "http://localhost:5678"
 const worksPath = '/api/works'
@@ -44,12 +45,12 @@ async function deleteWork (workID) {
             return response.status
     }
 }
+
 async function confirmDelete(workID, modal) {
     try {
         await deleteWork(workID)
-        // Reinitialize everything
         modal.close()
-        await init()
+        await updateWorksLists()
     } catch (e) {
         switch (e.name) {
             case 'UnauthorizedError':
@@ -60,42 +61,23 @@ async function confirmDelete(workID, modal) {
         }
     }
 }
-function updateConfirmOrCancelDeleteWorkModal(work) {
-    const confirmOrCancelModal = document.querySelector('.confirm-or-cancel-dialog')
-    const confirmOrCancelText = confirmOrCancelModal.querySelector('.dialog__text')
-    const confirmButton = confirmOrCancelModal.querySelector('.confirm')
-    const cancelButton = confirmOrCancelModal.querySelector('.cancel')
 
-    confirmOrCancelText.textContent = `Êtes vous sûr de vouloir supprimer le projet n°${work.id} - ${work.title} ?`
-    async function _confirmDelete() {await confirmDelete(work.id, confirmOrCancelModal);}
-    confirmButton.addEventListener('click', _confirmDelete)
-    cancelButton.addEventListener('click', () => {
-        confirmButton.removeEventListener('click', _confirmDelete)
-        confirmOrCancelModal.close()
-    })
-    confirmOrCancelModal.showModal()
-}
 export function setUpDeleteWorkButtons(works) {
+    const deleteWorksList = document.querySelector('.dialog__works-list')
+    deleteWorksList.innerHTML = deleteWorkListHTML(works)
     const deleteWorkButtons = Array.from(document.querySelectorAll('#admin-delete-dialog .delete-button'))
 
     deleteWorkButtons.forEach(button =>
         button.addEventListener('click', async () => {
+            const modal = document.getElementById('admin-delete-dialog')
+            const confirmOrCancelModal = modal.querySelector('.confirm-or-cancel-dialog')
             const work = getWorkByID(parseInt(button.value), works)
-            updateConfirmOrCancelDeleteWorkModal(work)
+
+            const confirmText = `Êtes vous sûr de vouloir supprimer le projet n°${work.id} - ${work.title} ?`
+            async function _confirmDelete() {
+                await confirmDelete(work.id, confirmOrCancelModal)
+            }
+
+            updateConfirmOrCancelModal(confirmOrCancelModal, _confirmDelete, confirmText)
         }))
-}
-export function setUpAdminDeleteModal(works) {
-    const modal = document.getElementById('admin-delete-dialog')
-    const showButtons = Array.from(document.querySelectorAll('.admin-delete-dialog-show'))
-    showButtons.forEach(
-        showButton=>
-            showButton.addEventListener('click', ()=> modal.showModal()))
-
-    const closeButtons = Array.from(modal.querySelectorAll('.admin-delete-dialog-close'))
-    closeButtons.forEach(
-        closeButton=>
-            closeButton.addEventListener('click', ()=> modal.close()))
-
-    const deleteWorksList = modal.querySelector('.dialog__works-list')
-    deleteWorksList.innerHTML = deleteWorkListHTML(works)
 }

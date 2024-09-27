@@ -91,10 +91,10 @@
                     class="fa-solid fa-xmark"></i></button>
         </nav>
         <h3>Ajout photo</h3>
-        <form class="basic-form dialog__add-form dialog-content">
+        <form class="basic-form dialog__add-form dialog-content" enctype="multipart/form-data">
             <label class="dragAndDrop-wrapper">
                 <i class="fa-solid fa-image"></i>
-                <input required name="file" type="file">
+                <input required name="image" type="file">
                 jpg, png: 4mo max
             </label>
             <label for="add-form-title">Titre</label>
@@ -102,13 +102,17 @@
 
             <label for="add-form-category">Categories</label>
             <select required name="category" id="add-form-category">
-                <option>Objets</option>
-                <option>Appartements</option>
-                <option>Hotels & restaurants</option>
             </select>
             <hr/>
             <input disabled class="action-button" name="submitInput" type="submit" value="Valider">
         </form>
+        <dialog class="confirm-or-cancel-dialog">
+            <p class="dialog__text"></p>
+            <div class="buttons-wrapper">
+                <button class="confirm">Confirmer</button>
+                <button class="cancel">annuler</button>
+            </div>
+        </dialog>
     </dialog>
 </main>
 

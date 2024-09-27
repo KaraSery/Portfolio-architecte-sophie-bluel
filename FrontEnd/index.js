@@ -1,5 +1,6 @@
-import {setUpAdminDeleteModal, setUpDeleteWorkButtons} from "./admin/js/admin-delete.js";
-import {setUpAdminAddModal} from "./admin/js/adminAdd.js";
+import {setUpAddForm} from "./admin/js/adminAdd.js";
+import {setUpDeleteWorkButtons} from "./admin/js/admin-delete.js";
+import {setUpAdminModal} from "./modal.js";
 
 const APIRootUrl = "http://localhost:5678"
 const categoriesPath = '/api/categories'
@@ -93,13 +94,31 @@ export async function init() {
 //******ADMIN*******
 //******************
 //******************
-//     DELETE
-    setUpAdminDeleteModal(works)
+//     Admin DELETE
+//     Setup admin delete dialog
+    setUpAdminModal('admin-delete-dialog')
     setUpDeleteWorkButtons(works)
-//     ADD
-    setUpAdminAddModal()
+//     Admin ADD
+//     Setup admin add dialog
+    setUpAdminModal('admin-add-dialog')
+    setUpAddForm(categories)
 }
 
+// Update Elements that depend on works list
+export async function updateWorksLists() {
+    const works = await getWorks()
+    const gallery = setupWorksInGallery(works)
+
+    const categories = await getCategories()
+    const filters = setCategoriesFilters(categories, works)
+//******************
+//******************
+//******ADMIN*******
+//******************
+//******************
+//     DELETE
+    setUpDeleteWorkButtons(works)
+}
 async function main() {
     await init()
 }
