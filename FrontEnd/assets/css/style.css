@@ -142,6 +142,17 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+#portfolio h2 a {
+	font-family: "Work Sans", sans-serif;
+	margin-left: 30px;
+	font-size: 14px;
+	text-decoration: none;
+	color: black;
+	font-weight: 300;
+}
+#portfolio h2 a i {
+	margin-right: 10px;
+}
 .filters {
 	font-family: 'Syne';
 	color: #1D6154;
@@ -205,7 +216,6 @@ li:hover {
 	flex-direction: column;
 }
 .basic-form hr {
-	margin-top: 40px;
 	width: 100%;
 }
 
@@ -283,10 +293,16 @@ footer nav ul {
 }
 .admin-dialog .dialog-content {
 	padding-inline: 85px;
-	padding-block: 45px 0px;
+	padding-block: 45px 60px;
 }
 .admin-dialog, .admin-dialog *{
 	box-sizing: border-box;
+}
+#admin-add-dialog .dialog-content{
+	padding-bottom: 0px;
+}
+#admin-add-dialog .dialog-content hr{
+	margin-top: 50px;
 }
 #admin-delete-dialog .dialog__works-list {
 	display: grid;
@@ -375,8 +391,27 @@ footer nav ul {
 	padding: 25px;
 	background: #E8F1F6;
 }
+.dragAndDrop-wrapper .display-image {
+	display: none;
+}
+.dragAndDrop-wrapper .display-image.show {
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #E8F1F6;
+}
+.dragAndDrop-wrapper .display-image.show img{
+	width: auto;
+	height: 100%;
+	object-fit: cover;
+}
 
 .dragAndDrop-wrapper input[type="file"] {
+	cursor: pointer;
 	position: absolute;
 	top: 0;
 	left: 0;

@@ -67,13 +67,27 @@ export function setUpAddForm(categories) {
             addForm.submitInput.removeAttribute('disabled') :
             addForm.submitInput.setAttribute('disabled', '')
     })
-
+    addForm.image.addEventListener('change', () => {
+        if (addForm.image.checkValidity()) {
+            const displayImageWrapper = addForm.image.labels[0].querySelector('.display-image')
+            const reader = new FileReader()
+            reader.addEventListener('load', (e)=> {
+                displayImageWrapper.outerHTML = `
+                <div class="display-image show">
+                    <img src="${reader.result}">
+                </div>
+                `
+            })
+            reader.readAsDataURL(addForm.image.files[0])
+        }
+    })
     addForm.addEventListener('submit', async e => {
         e.preventDefault()
         const formData = new FormData(addForm)
         const confirmOrCancelModal = modal.querySelector('.confirm-or-cancel-dialog')
 
         const confirmText = `Êtes vous sûr de vouloir ajouter ce projet - ${formData.get('title')} ?`
+
         async function _confirmAdd() {
             await confirmAdd(formData, confirmOrCancelModal);
         }

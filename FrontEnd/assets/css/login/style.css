@@ -61,3 +61,7 @@ main {
 #lost-password {
     color: black;
 }
+.form-error {
+    width: 100%;
+    color: red;
+}

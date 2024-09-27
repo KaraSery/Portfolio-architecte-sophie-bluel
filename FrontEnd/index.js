@@ -1,5 +1,5 @@
 import {setUpAddForm} from "./admin/js/adminAdd.js";
-import {setUpDeleteWorkButtons} from "./admin/js/admin-delete.js";
+import {setUpDeleteWorkButtons} from "./admin/js/adminDelete.js";
 import {setUpAdminModal} from "./modal.js";
 
 const APIRootUrl = "http://localhost:5678"
@@ -35,6 +35,14 @@ function categoryHTML(category) {
         </label>
     `
 }
+function filterResetHTML() {
+    return `
+        <label  class="filters__reset filters__item filter__label">
+            <span>Tous</span>
+            <input  type="radio" name="filter" class="filters__input" value="">
+        </label>
+    `
+}
 function workHTML(work) {
     return `
         <figure>
@@ -63,7 +71,7 @@ function setupWorksInGallery(works) {
 }
 
 function setupFilters(works) {
-    const filtersItem = Array.from(document.querySelectorAll('.filters__item'))
+    const filtersItem = Array.from(document.querySelectorAll('.filters__item:not(.filters__reset)'))
 
     filtersItem.forEach(filterLabel => {
         const input = filterLabel.querySelector('input')
@@ -74,11 +82,17 @@ function setupFilters(works) {
         }
         input.addEventListener('change', filterWorkAndUpdateWorkInGallery)
     })
+
+    const filterReset = document.querySelector('.filters__reset')
+    filterReset.addEventListener('change', ()=> {
+        setupWorksInGallery(works)
+    })
 }
 
 function setCategoriesFilters(categories, works) {
     const filters = document.querySelector('.filters')
-    filters.innerHTML = categories.map(category => categoryHTML(category)).join('')
+    filters.innerHTML = filterResetHTML()
+    filters.innerHTML += categories.map(category => categoryHTML(category)).join('')
     setupFilters(works)
 
     return filters
@@ -89,19 +103,25 @@ export async function init() {
 
     const categories = await getCategories()
     const filters = setCategoriesFilters(categories, works)
+    if('token' in localStorage) {
 //******************
 //******************
 //******ADMIN*******
 //******************
 //******************
+//         Admin button
+        document.querySelector(
+            '#portfolio > h2')
+            .innerHTML += '<a class="admin-delete-dialog-show"><i class="fa-regular fa-pen-to-square"></i>Modifier</a>'
 //     Admin DELETE
 //     Setup admin delete dialog
-    setUpAdminModal('admin-delete-dialog')
-    setUpDeleteWorkButtons(works)
+        setUpAdminModal('admin-delete-dialog')
+        setUpDeleteWorkButtons(works)
 //     Admin ADD
 //     Setup admin add dialog
-    setUpAdminModal('admin-add-dialog')
-    setUpAddForm(categories)
+        setUpAdminModal('admin-add-dialog')
+        setUpAddForm(categories)
+    }
 }
 
 // Update Elements that depend on works list
@@ -111,13 +131,10 @@ export async function updateWorksLists() {
 
     const categories = await getCategories()
     const filters = setCategoriesFilters(categories, works)
-//******************
-//******************
-//******ADMIN*******
-//******************
-//******************
-//     DELETE
-    setUpDeleteWorkButtons(works)
+    if('token' in localStorage) {
+//  ADMIN DELETE
+        setUpDeleteWorkButtons(works)
+    }
 }
 async function main() {
     await init()
