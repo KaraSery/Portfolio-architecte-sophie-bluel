@@ -141,8 +141,5 @@ export async function updateWorksLists() {
         setUpDeleteWorkButtons(works)
     }
 }
-async function main() {
-    await init()
-}
 
-main()
+init()
