@@ -39,7 +39,7 @@ function filterResetHTML() {
     return `
         <label  class="filters__reset filters__item filter__label">
             <span>Tous</span>
-            <input  type="radio" name="filter" class="filters__input" value="">
+            <input checked type="radio" name="filter" class="filters__input" value="">
         </label>
     `
 }
@@ -103,6 +103,9 @@ export async function init() {
 
     const categories = await getCategories()
     const filters = setCategoriesFilters(categories, works)
+    const adminBanner = document.querySelector('.admin-banner')
+    adminBanner.classList.remove('show')
+    adminBanner.classList.add('hide')
     if('token' in localStorage) {
 //******************
 //******************
@@ -110,6 +113,8 @@ export async function init() {
 //******************
 //******************
 //         Admin button
+
+        adminBanner.classList.add('show')
         document.querySelector(
             '#portfolio > h2')
             .innerHTML += '<a class="admin-delete-dialog-show"><i class="fa-regular fa-pen-to-square"></i>Modifier</a>'

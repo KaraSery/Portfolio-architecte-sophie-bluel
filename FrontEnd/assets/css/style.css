@@ -47,6 +47,7 @@ table {
 	border-spacing: 0;
 }
 a {
+	color: inherit;
 	text-decoration: none;
 }
 /** end reset css**/
@@ -69,6 +70,27 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+}
+body:has(.admin-banner.show) {
+	padding-top: 59px;
+}
+
+.admin-banner {
+	display: none;
+}
+.admin-banner.show {
+	background-color: black;
+	color: white;
+	font-size: 16px;
+	font-weight: 400;
+	padding-block: 21px;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	position: absolute;
+	width: 100vw;
+	top: 0;
+	left: 0;
 }
 header {
 	display: flex;
