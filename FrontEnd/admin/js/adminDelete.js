@@ -18,11 +18,6 @@ function deleteWorkListHTML(works) {
 }
 
 async function deleteWork (workID) {
-    if (!('token' in localStorage)) {
-        const error = new Error('No token in localStorage')
-        error.name = 'UnauthorizedError'
-        throw error
-    }
     const url = new URL(APIRootUrl);
     url.pathname = `${worksPath}/${workID}`
     const response = await fetch(url, {
