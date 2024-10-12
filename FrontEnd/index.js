@@ -97,27 +97,42 @@ function setCategoriesFilters(categories, works) {
 
     return filters
 }
+function logout() {
+    localStorage.removeItem('token')
+    toggleAdminUI()
+}
+function toggleDisplay(querySelector) {
+    const element = document.querySelector(querySelector)
+    element.classList.toggle('hide')
+    element.classList.toggle('show')
+}
+function toggleAdminUI() {
+    toggleDisplay('.admin-banner')
+    toggleDisplay('#admin-entry-point')
+    toggleDisplay('#login')
+    toggleDisplay('#logout')
+    toggleDisplay('.filters')
+
+    const logoutLink = document.getElementById('logout')
+    logoutLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        logout()
+    }, {once: true})
+}
 export async function init() {
     const works = await getWorks()
     const gallery = setupWorksInGallery(works)
 
     const categories = await getCategories()
     const filters = setCategoriesFilters(categories, works)
-    const adminBanner = document.querySelector('.admin-banner')
-    adminBanner.classList.remove('show')
-    adminBanner.classList.add('hide')
     if('token' in localStorage) {
 //******************
 //******************
 //******ADMIN*******
 //******************
 //******************
-//         Admin button
-
-        adminBanner.classList.add('show')
-        document.querySelector(
-            '#portfolio > h2')
-            .innerHTML += '<a class="admin-delete-dialog-show"><i class="fa-regular fa-pen-to-square"></i>Modifier</a>'
+//     UI
+        toggleAdminUI()
 //     Admin DELETE
 //     Setup admin delete dialog
         setUpAdminModal('admin-delete-dialog')

@@ -37,13 +37,16 @@ async function addWork(formData) {
             return await response.json()
     }
 }
-
+function resetForm(form) {
+    form.reset()
+    form.image.labels[0].querySelector('.display-image').outerHTML = `<div class="display-image hide"></div>`
+}
 async function confirmAdd(formData, modal) {
     try {
         await addWork(formData)
         modal.close()
         const addForm = document.querySelector('.dialog__add-form')
-        addForm.reset()
+        resetForm(addForm)
         addForm.submitInput.setAttribute('disabled', '')
         updateWorksLists()
     } catch (e) {

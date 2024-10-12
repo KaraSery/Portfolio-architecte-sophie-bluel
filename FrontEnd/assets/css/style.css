@@ -75,9 +75,6 @@ body:has(.admin-banner.show) {
 	padding-top: 59px;
 }
 
-.admin-banner {
-	display: none;
-}
 .admin-banner.show {
 	background-color: black;
 	color: white;
@@ -387,12 +384,7 @@ footer nav ul {
 	color: #B9C5CC;
 	margin-bottom: 10px;
 }
-.dragAndDrop-wrapper::after {
-	content: 'jpg, png 4mo max';
-	display: block;
-	font-size: 10px;
-	margin-top: 5px;
-}
+
 
 .dragAndDrop-wrapper::before {
 	content: 'Ajouter une image';
@@ -442,4 +434,7 @@ footer nav ul {
 	opacity: 0;
 }
 
+.hide {
+	display: none;
+}
 

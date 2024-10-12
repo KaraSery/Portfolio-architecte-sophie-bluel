@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div class="admin-banner show">
+<div class="admin-banner hide">
     <i class="fa-regular fa-pen-to-square"></i>
     Mode édition
 </div>
@@ -25,7 +25,8 @@
         <ul>
             <li>projets</li>
             <li>contact</li>
-            <li><a href="login/login.html">login</a></li>
+            <li><a id="login" href="login/login.html">login</a></li>
+            <li><a id="logout" class="hide">logout</a></li>
             <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
         </ul>
     </nav>
@@ -47,9 +48,9 @@
         </article>
     </section>
     <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <h2>Mes Projets <a id="admin-entry-point" class="admin-delete-dialog-show hide"><i class="fa-regular fa-pen-to-square"></i>Modifier</a></h2>
 
-        <form class="filters">
+        <form class="filters show">
         </form>
         <div class="gallery">
 
